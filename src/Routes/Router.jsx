@@ -4,6 +4,8 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register/Register";
+import AvailableCamp from "../Pages/Available Camp/AvailableCamp";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -11,19 +13,27 @@ const router = createBrowserRouter([
     element: <MainLayout></MainLayout>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
-        {
-            path: "/",
-            element: <Home></Home>
-        },
-        {
-            path: 'login',
-            element: <Login></Login>
-        },
-        {
-            path: 'register',
-            element: <Register></Register>
-        }
-    ]
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "availableCamp",
+        element: (
+          <PrivetRoute>
+            <AvailableCamp></AvailableCamp>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
   },
 ]);
 
