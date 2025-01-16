@@ -2,34 +2,41 @@ import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
-
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/Social Login/SocialLogin";
 
 const Login = () => {
-  const {signIn} = useContext(AuthContext);
+  const { signIn, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/'
+  const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email,password)
-    .then(result =>{
-      const user = result.user
-      navigate(from, {replace: true});
-      toast.success('Welcome')
-    })
-    .catch(err=>{
-      console.log(err.message);
-    })
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        navigate(from, { replace: true });
+        toast.success("Welcome");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
     <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800 mx-auto">
       <h1 className="text-2xl font-bold text-center">Login</h1>
-      <form onSubmit={handleLogin} noValidate="" action="" className="space-y-6">
+      <form
+        onSubmit={handleLogin}
+        noValidate=""
+        action=""
+        className="space-y-6"
+      >
         <div className="space-y-1 text-sm">
           <label htmlFor="username" className="block dark:text-gray-600">
             Username
@@ -70,8 +77,9 @@ const Login = () => {
         </p>
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
       </div>
-      <div>
+      {/* <div>
         <button
+          onClick={handleGoogleLogin}
           aria-label="Login with Google"
           type="button"
           className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
@@ -85,15 +93,17 @@ const Login = () => {
           </svg>
           <p>Login with Google</p>
         </button>
-      </div>
+      </div> */}
+      <SocialLogin></SocialLogin>
       <p className="text-sm text-center sm:px-6 dark:text-gray-600">
         Don't have an account?
-        <Link to="/register"
+        <Link
+          to="/register"
           rel="noopener noreferrer"
           href="#"
           className="underline dark:text-gray-800 ml-2"
         >
-        Register
+          Register
         </Link>
       </p>
     </div>

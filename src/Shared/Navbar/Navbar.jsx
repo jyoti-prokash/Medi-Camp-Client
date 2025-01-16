@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 
@@ -72,8 +72,8 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  alt={user.name}
+                  src={user.photoURL}
                 />
               </div>
             </div>
@@ -82,10 +82,10 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">Profile</a>
+                <a className="justify-between">{user.displayName}</a>
               </li>
               <li>
-                <a>Dashboard</a>
+                <Link to="/dashboard/addCamp">Dashboard</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
