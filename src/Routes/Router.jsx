@@ -11,6 +11,7 @@ import ManageCamp from "../Pages/adminPage/ManageCamp";
 import AddCamp from "../Pages/adminPage/addCamp";
 import ManageRegistered from "../Pages/adminPage/ManageRegistered";
 import AllUsers from "../Pages/adminPage/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -47,25 +48,42 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard/profile',
+        path: "/dashboard/profile",
+      },
+      // admin route
+      {
+        path: "/dashboard/addCamp",
+        element: (
+          <AdminRoute>
+            <AddCamp></AddCamp>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/addCamp',
-        element: <AddCamp></AddCamp>
+        path: "/dashboard/manageCamp",
+        element: (
+          <AdminRoute>
+            <ManageCamp></ManageCamp>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/manageCamp',
-        element: <ManageCamp></ManageCamp>
+        path: "/dashboard/manageRegistered",
+        element: (
+          <AdminRoute>
+            <ManageRegistered></ManageRegistered>
+          </AdminRoute>
+        ),
       },
       {
-        path: '/dashboard/manageRegistered',
-        element: <ManageRegistered></ManageRegistered>
+        path: "/dashboard/allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
-      {
-        path: '/dashboard/allUsers',
-        element: <AllUsers></AllUsers>
-      }
-    ]
+    ],
   },
 ]);
 

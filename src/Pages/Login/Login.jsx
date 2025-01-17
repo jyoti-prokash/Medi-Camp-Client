@@ -50,13 +50,12 @@ const Login = () => {
           />
         </div>
         <div className="space-y-1 text-sm">
-          <label htmlFor="password" className="block dark:text-gray-600">
+          <label className="block dark:text-gray-600">
             Password
           </label>
           <input
             type="password"
             name="password"
-            id="password"
             placeholder="Password"
             className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
           />

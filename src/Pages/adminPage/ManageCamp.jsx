@@ -3,8 +3,8 @@ import React from 'react';
 const ManageCamp = () => {
     return (
       <div>
-        {/* <SectionTitle heading={'Manage Camp'}></SectionTitle> */}
-        
+            <h2>Manage Camp</h2>
+            
       </div>
     );
 };
