@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
-
+import './Navbar.css'
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="availableCamp">Available Camps</NavLink>
+        <NavLink to="/availableCamp">Available Camps</NavLink>
       </li>
       {!user && (
         <li>
@@ -31,7 +31,7 @@ const Navbar = () => {
       });
   };
   return (
-    <div className="navbar lg:px-20 mx-auto bg-red-500 py-3">
+    <div className="navbar lg:px-20 mx-auto py-3 fixed z-50 bg-opacity-70">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -57,7 +57,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="text-2xl">Medical Camp</a>
+        <a className="text-2xl text-white font-bold">Medi|Camp</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -71,10 +71,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt={user.name}
-                  src={user.photoURL}
-                />
+                <img alt={user.name} src={user.photoURL} />
               </div>
             </div>
             <ul

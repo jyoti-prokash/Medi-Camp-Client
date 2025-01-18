@@ -8,10 +8,11 @@ import AvailableCamp from "../Pages/Available Camp/AvailableCamp";
 import PrivetRoute from "./PrivetRoute";
 import DashboardLayout from "../Layouts/Dashboard Layout/DashboardLayout";
 import ManageCamp from "../Pages/adminPage/ManageCamp";
-import AddCamp from "../Pages/adminPage/addCamp";
 import ManageRegistered from "../Pages/adminPage/ManageRegistered";
 import AllUsers from "../Pages/adminPage/AllUsers";
 import AdminRoute from "./AdminRoute";
+import AddCamp from "../Pages/adminPage/AddCamp";
+import CampDetails from "../Pages/CampDetails/CampDetails";
 
 
 
@@ -26,8 +27,13 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "availableCamp",
+        path: "/availableCamp",
         element: <AvailableCamp></AvailableCamp>,
+      },
+      {
+        path: "/campDetails/:id",
+        element: <CampDetails></CampDetails>,
+
       },
       {
         path: "/login",

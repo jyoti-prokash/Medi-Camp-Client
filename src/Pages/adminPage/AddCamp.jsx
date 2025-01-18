@@ -37,22 +37,22 @@ const AddCamp = () => {
         campName: data.campName,
         campPhoto: imageUrl,
         campFees: parseFloat(data.campFees),
-        date: data.date,
+        dateTime: data.date,
         location: data.location,
         professionalName: data.professionalName,
-        participant: parseFloat(data.participant),
+        participantCount: parseFloat(data.participant),
         description: data.description,
       };
 
-      console.log("Camp data to save:", campData);
+      // console.log("Camp data to save:", campData);
 
       // Save camp data to your backend
       const campRes = await axiosPublic.post("/camps", campData);
       // console.log(campRes.data);
-      if(campRes.data.insertedId){
-        reset()
+      if (campRes.data.insertedId) {
+        reset();
         toast.success("Camp added successfully!");
-      };
+      }
     } catch (error) {
       console.error("Error adding camp:", error);
       alert("An error occurred. Please try again.");
