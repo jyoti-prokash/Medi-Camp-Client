@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import calender from '../../assets/icons/calendar.png'
 import locationIcon from '../../assets/icons/location.png'
+import CampForm from "./CampForm";
 
 const CampDetails = () => {
   const { id } = useParams();
@@ -35,8 +36,9 @@ const CampDetails = () => {
     participantCount,
     description,
   } = camp;
+
   return (
-    <div className="md:flex gap-10 m-20">
+    <div className="md:flex gap-10 p-20">
       <div>
         <img className="object-cover" src={campPhoto} alt="" srcset="" />
       </div>
@@ -53,7 +55,24 @@ const CampDetails = () => {
           <img className="w-10" src={locationIcon} alt="" />
           <p className="text-lg font-semibold">{location}</p>
         </div>
-        <button className="btn btn-outline">Join Camp</button>
+        <button
+          className="btn bg-[#148980] px-6 py-3 font-bold hover:bg-[#F3C677] hover:text-black rounded-3xl my-5"
+          onClick={() => document.getElementById("my_modal_4").showModal()}
+        >
+          Join Camp
+        </button>
+
+        {/* Modal */}
+        <dialog id="my_modal_4" className="modal w-full max-w-6xl">
+          <div className="modal-box w-11/12 max-w-5xl">
+            <h3 className="font-bold text-lg text-center">Booking Details</h3>
+            <div>
+              <div>
+                <CampForm camp={camp}></CampForm>
+              </div>
+            </div>
+          </div>
+        </dialog>
       </div>
     </div>
   );

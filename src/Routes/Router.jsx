@@ -32,8 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/campDetails/:id",
-        element: <CampDetails></CampDetails>,
-
+        element: (
+          <PrivetRoute>
+            <CampDetails></CampDetails>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/login",

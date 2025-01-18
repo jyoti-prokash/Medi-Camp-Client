@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import './Navbar.css'
+import useAuth from "../../Hooks/useAuth";
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
   const navigate = useNavigate();
   const links = (
     <>
@@ -71,7 +71,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt={user.name} src={user.photoURL} />
+                <img alt={user.displayName} src={user.photoURL} />
               </div>
             </div>
             <ul

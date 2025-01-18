@@ -47,7 +47,7 @@ const AddCamp = () => {
       // console.log("Camp data to save:", campData);
 
       // Save camp data to your backend
-      const campRes = await axiosPublic.post("/camps", campData);
+      const campRes = await axiosSecure.post("/camps", campData);
       // console.log(campRes.data);
       if (campRes.data.insertedId) {
         reset();
