@@ -2,13 +2,15 @@ import React from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import calender from '../../assets/icons/calendar.png'
-import locationIcon from '../../assets/icons/location.png'
+import calender from "../../assets/icons/calendar.png";
+import locationIcon from "../../assets/icons/location.png";
 import CampForm from "./CampForm";
+import useAdmin from "../../Hooks/useAdmin";
 
 const CampDetails = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
+  const [isAdmin] = useAdmin();
   const {
     data: camp = [],
     isLoading,
@@ -56,8 +58,17 @@ const CampDetails = () => {
           <p className="text-lg font-semibold">{location}</p>
         </div>
         <button
-          className="btn bg-[#148980] px-6 py-3 font-bold hover:bg-[#F3C677] hover:text-black rounded-3xl my-5"
-          onClick={() => document.getElementById("my_modal_4").showModal()}
+          className={`btn px-6 py-3 font-bold rounded-3xl my-5 ${
+            isAdmin
+              ? "bg-gray-400 cursor-not-allowed" // Disabled styling for admin
+              : "bg-[#148980] hover:bg-[#F3C677] hover:text-black"
+          }`}
+          onClick={() => {
+            if (!isAdmin) {
+              document.getElementById("my_modal_4").showModal();
+            }
+          }}
+          disabled={isAdmin} // Disable the button if admin
         >
           Join Camp
         </button>

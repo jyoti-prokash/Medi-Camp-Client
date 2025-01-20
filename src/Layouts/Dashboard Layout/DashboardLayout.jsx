@@ -1,13 +1,25 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
+import useAuth from "../../Hooks/useAuth";
 
 const DashboardLayout = () => {
   const [isAdmin] = useAdmin();
+  const {logOut} = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="flex gap-5">
       <div>
-        <ul className="menu bg-base-200 text-base-content min-h-full lg:w-80 p-4">
+        <ul className="menu bg-[#148980] text-base-content min-h-screen lg:w-80 p-4 relative">
           {/* Sidebar content here */}
           {/* admin side */}
           {isAdmin ? (
@@ -27,9 +39,7 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/allUsers">
-                  All Users
-                </NavLink>
+                <NavLink to="/dashboard/allUsers">All Users</NavLink>
               </li>
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -41,11 +51,32 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard/profile">User Profile</NavLink>
               </li>
               <li>
+                <NavLink to="/dashboard/analytics">Analytics</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/registeredCamp">
+                  Registered Camps
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/">Home</NavLink>
               </li>
             </>
           )}
         </ul>
+        <div className="absolute bottom-5 left-2">
+          <button
+            onClick={handleLogout}
+            className="btn btn-outline text-white font-bold"
+          >
+            LogOut
+          </button>
+        </div>
       </div>
       <div>
         <Outlet></Outlet>

@@ -10,7 +10,7 @@ const MainLayout = () => {
           <Navbar></Navbar>
         </section>
         <section className="min-h-screen">
-          <section className=''>
+          <section className="">
             <Outlet></Outlet>
           </section>
         </section>

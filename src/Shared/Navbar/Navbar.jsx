@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import './Navbar.css'
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 import useAuth from "../../Hooks/useAuth";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const links = (
     <>
       <li>
@@ -24,14 +24,19 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
   return (
-    <div className="navbar lg:px-20 mx-auto py-3 fixed z-50 bg-opacity-70">
+    <div
+      className={`navbar bg-[#148980] lg:px-44 lg:py-5 ${
+        location.pathname === "/" &&
+        "fixed z-50 bg-opacity-50 bg-[#148980] py-5"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -52,7 +57,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow bg-[#148980]"
           >
             {links}
           </ul>
@@ -76,7 +81,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow bg-[#148980]"
             >
               <li>
                 <a className="justify-between">{user.displayName}</a>

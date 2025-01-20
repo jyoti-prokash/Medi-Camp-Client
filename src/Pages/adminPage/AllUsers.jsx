@@ -14,9 +14,9 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users", {
-        headers:{
-            Authorization: `Bearer ${localStorage.getItem('access-token')}`
-        }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
       });
       return res.data;
     },
@@ -29,68 +29,83 @@ const AllUsers = () => {
   if (isError) {
     return <p>Error: {error.message}</p>;
   }
-//   user delete
-const handleDelete = (id) => {
-    axiosSecure.delete(`/users/${id}`)
-    .then(res=>{
-        if(res.data.deletedCount > 0){
-            refetch();
-            toast.success('deleted successfully')
-        }
-    })
-};
-const handleAdmin = (id) => {
-    axiosSecure.patch(`/users/admin/${id}`)
-    .then(res=>{
-        if(res.data.modifiedCount > 0){
-            refetch();
-            toast.success('admin successfully')
-        }
-    })
-};
+
+  // Handle delete user
+  const handleDelete = (id) => {
+    axiosSecure.delete(`/users/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        refetch();
+        toast.success("User deleted successfully");
+      }
+    });
+  };
+
+  // Handle make admin
+  const handleAdmin = (id) => {
+    axiosSecure.patch(`/users/admin/${id}`).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        toast.success("User promoted to admin");
+      }
+    });
+  };
 
   return (
-    <div>
-      <h2>Total Users {users.length}</h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full bg-gray-500">
-          {/* head */}
-          <thead>
+    <div className="p-5">
+      <h2 className="text-2xl font-bold mb-5 text-center">
+        Total Users: {users.length}
+      </h2>
+      <div className="overflow-x-auto rounded-lg shadow-lg">
+        <table className="min-w-full table-auto bg-white border border-gray-300 rounded-lg">
+          <thead className="bg-gray-800 text-white">
             <tr>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Confirmation Status</th>
-              <th>Delete</th>
+              <th className="py-3 px-6 text-left">User Name</th>
+              <th className="py-3 px-6 text-left">Email</th>
+              <th className="py-3 px-6 text-center">Role</th>
+              <th className="py-3 px-6 text-center">Action</th>
+              <th className="py-3 px-6 text-center">Delete</th>
             </tr>
           </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr
+                key={user._id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                } hover:bg-gray-200`}
+              >
+                <td className="py-3 px-6">{user.name}</td>
+                <td className="py-3 px-6">{user.email}</td>
+                <td className="py-3 px-6 text-center">
+                  {user.role === "admin" ? (
+                    <span className="text-green-600 font-semibold">Admin</span>
+                  ) : (
+                    <button
+                      onClick={() => handleAdmin(user._id)}
+                      className="btn btn-sm btn-primary"
+                    >
+                      Make Admin
+                    </button>
+                  )}
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <button className="btn btn-sm btn-outline btn-success">
+                    Confirm
+                  </button>
+                </td>
+                <td className="py-3 px-6 text-center">
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn btn-sm btn-outline btn-error"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
-
-      {users.map((user) => (
-        <tbody className="w-full">
-          {/* row 1 */}
-          <tr>
-            <th>{user.name}</th>
-            <th>{user.email}</th>
-            <td>
-              {user.role === "admin" ? (
-                "Admin"
-              ) : (
-                <button onClick={() => handleAdmin(user._id)} className="btn">
-                  Make Admin
-                </button>
-              )}
-            </td>
-            <td>Quality Control Specialist</td>
-            <td>
-              <button onClick={() => handleDelete(user._id)} className="btn">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      ))}
     </div>
   );
 };

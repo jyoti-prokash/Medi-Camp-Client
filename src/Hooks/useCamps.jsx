@@ -3,15 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 
 const useCamps = () => {
     const axiosPublic = useAxiosPublic();
-    const { data: camp = [], isPending: loading, refetch } = useQuery({
+    const { data: camps = [], isPending: loading, refetch } = useQuery({
       queryKey: ['camp'],
       queryFn: async () => {
         const res = await axiosPublic.get("/availableCamps");
-        console.log(res.data);
         return res.data;
       },
     });
-    return [camp, loading, refetch]
+    return [camps, loading, refetch]
 };
 
 export default useCamps;

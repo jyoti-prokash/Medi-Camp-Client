@@ -13,6 +13,8 @@ import AllUsers from "../Pages/adminPage/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddCamp from "../Pages/adminPage/AddCamp";
 import CampDetails from "../Pages/CampDetails/CampDetails";
+import RegisteredCamps from "../Pages/ParticipantPage/RegisteredCamps";
+import Profile from "../Shared/Profile/Profile";
 
 
 
@@ -58,6 +60,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/profile",
+        element: <Profile></Profile>
+      },
+      // user route
+      {
+        path: "/dashboard/registeredCamp",
+        element: <PrivetRoute><RegisteredCamps></RegisteredCamps></PrivetRoute>
       },
       // admin route
       {
