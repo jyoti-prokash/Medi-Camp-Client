@@ -21,9 +21,7 @@ const Profile = () => {
             <div>
               <h2 className="text-2xl font-semibold">{user.displayName}</h2>
               <span className="text-sm dark:text-gray-600">
-                {
-                    isAdmin? 'Organizer': 'Participant'
-                }
+                Organizer
               </span>
             </div>
             <div className="space-y-1">

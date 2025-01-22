@@ -17,6 +17,8 @@ import RegisteredCamps from "../Pages/ParticipantPage/RegisteredCamps";
 import Profile from "../Shared/Profile/Profile";
 import Payment from "../Pages/ParticipantPage/Payment";
 import PaymentHistory from "../Pages/ParticipantPage/PaymentHistory";
+import Analytics from "../Pages/ParticipantPage/Analytics";
+import UserProfile from "../Pages/ParticipantPage/UserProfile";
 
 
 
@@ -61,10 +63,22 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/profile",
-        element: <Profile></Profile>,
+        path: "/dashboard/UserProfile",
+        element: (
+          <PrivetRoute>
+            <UserProfile></UserProfile>
+          </PrivetRoute>
+        ),
       },
       // user route
+      {
+        path: "/dashboard/analytics",
+        element: (
+          <PrivetRoute>
+            <Analytics></Analytics>
+          </PrivetRoute>
+        ),
+      },
       {
         path: "/dashboard/registeredCamp",
         element: (
@@ -85,11 +99,19 @@ const router = createBrowserRouter([
         path: "/dashboard/paymentHistory",
         element: (
           <PrivetRoute>
-            <PaymentHistory/>
+            <PaymentHistory />
           </PrivetRoute>
         ),
       },
       // admin route
+      {
+        path: "/dashboard/AdminProfile",
+        element: (
+          <AdminRoute>
+            <Profile></Profile>
+          </AdminRoute>
+        ),
+      },
       {
         path: "/dashboard/addCamp",
         element: (

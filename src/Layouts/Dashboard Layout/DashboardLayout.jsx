@@ -25,7 +25,7 @@ const DashboardLayout = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/profile">Admin Profile</NavLink>
+                <NavLink to="/dashboard/AdminProfile">Admin Profile</NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/addCamp">Add Camp</NavLink>
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/profile">User Profile</NavLink>
+                <NavLink to="/dashboard/UserProfile">Profile</NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/analytics">Analytics</NavLink>

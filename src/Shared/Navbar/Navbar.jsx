@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import useAuth from "../../Hooks/useAuth";
+import useAdmin from "../../Hooks/useAdmin";
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [isAdmin] = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
   const links = (
@@ -86,9 +88,19 @@ const Navbar = () => {
               <li>
                 <a className="justify-between">{user.displayName}</a>
               </li>
-              <li>
-                <Link to="/dashboard/profile">Dashboard</Link>
-              </li>
+              {isAdmin ? (
+                <>
+                  <li>
+                    <Link to="/dashboard/adminProfile">Dashboard</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/dashboard/userProfile">Dashboard</Link>
+                  </li>
+                </>
+              )}
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
