@@ -19,7 +19,6 @@ const ManageCamp = () => {
       }
     });
   };
-
   return (
     <div>
       <h2>Manage Camp</h2>

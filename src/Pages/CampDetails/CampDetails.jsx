@@ -79,7 +79,7 @@ const CampDetails = () => {
             <h3 className="font-bold text-lg text-center">Booking Details</h3>
             <div>
               <div>
-                <CampForm camp={camp}></CampForm>
+                <CampForm camp={camp} refetch={refetch}></CampForm>
               </div>
             </div>
           </div>

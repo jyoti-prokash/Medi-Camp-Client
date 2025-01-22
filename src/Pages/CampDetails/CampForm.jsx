@@ -4,9 +4,9 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
-const CampForm = ({ camp }) => {
+const CampForm = ({ camp, refetch }) => {
   const { user } = useAuth();
-  const { campFees, campName, location, professionalName } = camp;
+  const { _id, campFees, campName, location, professionalName } = camp;
   const axiosPublic = useAxiosPublic(); // Use axios instance
   const {
     register,
@@ -22,6 +22,7 @@ const CampForm = ({ camp }) => {
         campName,
         campFees: parseFloat(campFees),
         location,
+        campId: _id,
         professionalName,
         participantName: user?.displayName,
         participantEmail: user?.email,
@@ -32,13 +33,13 @@ const CampForm = ({ camp }) => {
       if (response?.data?.insertedId) {
         reset();
         toast.success("Participant data submitted successfully!");
+        refetch();
       }
     } catch (error) {
-      console.error("Error submitting participant data:", error);
-      toast.error("An error occurred while submitting data. Please try again.");
+      toast.error(error?.response?.data);
     }
   };
-//   close modal
+  //   close modal
   const modal = document.getElementById("my_modal_4");
   if (modal) {
     modal.close();

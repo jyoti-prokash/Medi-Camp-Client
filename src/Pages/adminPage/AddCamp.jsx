@@ -40,7 +40,7 @@ const AddCamp = () => {
         dateTime: data.date,
         location: data.location,
         professionalName: data.professionalName,
-        participantCount: parseFloat(data.participant),
+        participantCount: 0,
         description: data.description,
       };
 
@@ -137,26 +137,12 @@ const AddCamp = () => {
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
-            <div className="col-span-full sm:col-span-3">
-              <label className="text-sm">Participant Count</label>
-              <input
-                {...register("participant", { required: true })}
-                type="number"
-                defaultValue={0}
-                placeholder="Participant"
-                className="input input-bordered w-full"
-              />
-              {errors.participant && (
-                <span className="text-red-600">This field is required</span>
-              )}
-            </div>
-
             <div className="col-span-full">
               <label className="text-sm">Description</label>
               <textarea
                 {...register("description", { required: true })}
                 placeholder="Type here"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:border-gray-300"
+                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:dark:ring-violet-600 dark:border-gray-300 py-5 px-3"
               />
               {errors.description && (
                 <span className="text-red-600">This field is required</span>
