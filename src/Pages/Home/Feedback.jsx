@@ -22,7 +22,7 @@ const Feedback = () => {
     },
   });
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto my-10 p-5">
       <SectionTitle
         header={"Feedback"}
         subtitle={"Participants talk"}
@@ -46,7 +46,7 @@ const Feedback = () => {
             key={index}
             className="rounded-lg shadow-md p-6 text-center"
           >
-            <p className="text-lg font-medium text-gray-700">
+            <p className="text-lg w-5/6 mx-auto font-medium text-gray-700">
               {feedback.message || "No feedback provided."}
             </p>
             <p className="text-lg font-bold m-5">{feedback.userName}</p>

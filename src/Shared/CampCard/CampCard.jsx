@@ -14,10 +14,10 @@ const CampCard = ({camp}) => {
     } = camp;
     return (
       <div>
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl h-[550px] p-2 mx-auto">
           <figure>
             <img
-              className="w-[340px] h-[300px] object-cover transform transition-transform duration-500 hover:rotate-3"
+              className="w-[320px] object-cover transform transition-transform duration-500 hover:rotate-3"
               src={campPhoto}
             />
           </figure>
@@ -25,12 +25,12 @@ const CampCard = ({camp}) => {
             <h2 className="card-title">{campName}</h2>
             <p>location: {location}</p>
             <p>Participant: {participantCount}</p>
-            <p>Professional: {professionalName}</p>
+            <p className='font-semibold'>Professional: {professionalName}</p>
             <p>Date: {dateTime}</p>
-            <p>{description}</p>
+            <p>{description.split(' ').slice(0, 10).join(' ')} . . .</p>
             <div className="card-actions justify-end">
               <Link to={`/campDetails/${_id}`}>
-                <button className="bg-[#148980] px-6 py-3 font-bold hover:bg-[#F3C677] hover:text-black rounded-3xl my-5 text-white">
+                <button className="bg-[#148980] px-6 py-3 font-bold hover:bg-[#F3C677] hover:text-black rounded-3xl my-3 text-white">
                   Details
                 </button>
               </Link>

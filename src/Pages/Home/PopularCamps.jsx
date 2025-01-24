@@ -19,7 +19,7 @@ const PopularCamps = () => {
     },
   });
   return (
-    <div>
+    <div className="container mx-auto my-10">
       <SectionTitle
         header={"Popular Camp"}
         subtitle={"Most People Join"}
