@@ -17,7 +17,7 @@ const DashboardLayout = () => {
       });
   };
   return (
-    <div className="flex gap-5">
+    <div className="flex flex-col lg:flex-row lg:min-h-screen">
       <div>
         <ul className="menu bg-[#148980] text-base-content min-h-screen lg:w-80 p-4 relative">
           {/* Sidebar content here */}
@@ -25,7 +25,7 @@ const DashboardLayout = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/AdminProfile">Admin Profile</NavLink>
+                <NavLink to="/dashboard/profile">Admin Profile</NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/addCamp">Add Camp</NavLink>
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/UserProfile">Profile</NavLink>
+                <NavLink to="/dashboard/profile">Profile</NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/analytics">Analytics</NavLink>

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -32,10 +33,34 @@ const AllUsers = () => {
 
   // Handle delete user
   const handleDelete = (id) => {
-    axiosSecure.delete(`/users/${id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        refetch();
-        toast.success("User deleted successfully");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will permanently delete the user. Do you want to proceed?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, keep it",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/users/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "The user has been deleted.", "success");
+              toast.success("User deleted successfully!");
+            } else {
+              toast.error("Failed to delete user.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting user:", error);
+            toast.error("An error occurred while deleting the user.");
+          });
+      } else {
+        Swal.fire("Cancelled", "The user was not deleted.", "info");
       }
     });
   };
@@ -62,7 +87,6 @@ const AllUsers = () => {
               <th className="py-3 px-6 text-left">User Name</th>
               <th className="py-3 px-6 text-left">Email</th>
               <th className="py-3 px-6 text-center">Role</th>
-              <th className="py-3 px-6 text-center">Action</th>
               <th className="py-3 px-6 text-center">Delete</th>
             </tr>
           </thead>
@@ -87,11 +111,6 @@ const AllUsers = () => {
                       Make Admin
                     </button>
                   )}
-                </td>
-                <td className="py-3 px-6 text-center">
-                  <button className="btn btn-sm btn-outline btn-success">
-                    Confirm
-                  </button>
                 </td>
                 <td className="py-3 px-6 text-center">
                   <button

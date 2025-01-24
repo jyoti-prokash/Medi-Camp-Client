@@ -27,7 +27,6 @@ const CampForm = ({ camp, refetch }) => {
         participantName: user?.displayName,
         participantEmail: user?.email,
       };
-      console.log(data);
       // Save participant data to the backend
       const response = await axiosPublic.post("/participants", participantData);
       if (response?.data?.insertedId) {

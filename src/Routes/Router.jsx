@@ -18,9 +18,6 @@ import Profile from "../Shared/Profile/Profile";
 import Payment from "../Pages/ParticipantPage/Payment";
 import PaymentHistory from "../Pages/ParticipantPage/PaymentHistory";
 import Analytics from "../Pages/ParticipantPage/Analytics";
-import UserProfile from "../Pages/ParticipantPage/UserProfile";
-
-
 
 const router = createBrowserRouter([
   {
@@ -63,10 +60,10 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/UserProfile",
+        path: "/dashboard/profile",
         element: (
           <PrivetRoute>
-            <UserProfile></UserProfile>
+            <Profile></Profile>
           </PrivetRoute>
         ),
       },
@@ -104,14 +101,6 @@ const router = createBrowserRouter([
         ),
       },
       // admin route
-      {
-        path: "/dashboard/AdminProfile",
-        element: (
-          <AdminRoute>
-            <Profile></Profile>
-          </AdminRoute>
-        ),
-      },
       {
         path: "/dashboard/addCamp",
         element: (

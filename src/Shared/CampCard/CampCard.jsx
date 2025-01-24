@@ -30,7 +30,9 @@ const CampCard = ({camp}) => {
             <p>{description}</p>
             <div className="card-actions justify-end">
               <Link to={`/campDetails/${_id}`}>
-                <button className="btn btn-primary">Details</button>
+                <button className="bg-[#148980] px-6 py-3 font-bold hover:bg-[#F3C677] hover:text-black rounded-3xl my-5 text-white">
+                  Details
+                </button>
               </Link>
             </div>
           </div>

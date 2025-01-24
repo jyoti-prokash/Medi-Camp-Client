@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageRegistered = () => {
   const axiosSecure = useAxiosSecure();
@@ -48,22 +49,40 @@ const ManageRegistered = () => {
       return;
     }
 
-    const confirmCancel = window.confirm(
-      "Are you sure you want to cancel this registration?"
-    );
-    if (confirmCancel) {
-      try {
-        const res = await axiosSecure.delete(`/delete-participants/${id}`);
-        if (res.data.deletedCount > 0) {
-          refetch();
-          toast.success("Registration cancelled successfully!");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to cancel this registration. This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/delete-participants/${id}`);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire(
+              "Cancelled!",
+              "Registration has been cancelled.",
+              "success"
+            );
+            toast.success("Registration cancelled successfully!");
+          } else {
+            toast.error("Failed to cancel registration.");
+          }
+        } catch (error) {
+          console.error("Error canceling registration:", error);
+          toast.error("Failed to cancel registration.");
         }
-      } catch (error) {
-        console.error("Error canceling registration:", error);
-        toast.error("Failed to cancel registration.");
+      } else {
+        Swal.fire("Cancelled", "Your registration is safe!", "info");
       }
-    }
+    });
   };
+
 
   return (
     <div className="p-5">

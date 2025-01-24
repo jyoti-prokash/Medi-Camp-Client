@@ -2,9 +2,13 @@ import useParticipantsCamps from "../../Hooks/useParticipantsCamps";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
 
 const RegisteredCamps = () => {
   const [registeredCamps, refetch] = useParticipantsCamps();
+  const axiosPublic = useAxiosPublic();
+  const {user} = useAuth();
 
   // Handle Feedback
   const handleFeedback = (campId) => {
@@ -16,13 +20,25 @@ const RegisteredCamps = () => {
       confirmButtonText: "Submit",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed && result.value) {
-        // Submit feedback (example implementation)
-        toast.success("Thank you for your feedback!");
+        try {
+          const feedback = {
+            message: result.value,
+            userName: user?.displayName || "Anonymous", 
+            campId: campId,
+          };
+          // Submit feedback to the server
+          await axiosPublic.post(`/feedback`, feedback);
+          toast.success("Thank you for your feedback!");
+        } catch (error) {
+          console.error("Error submitting feedback:", error);
+          toast.error("Failed to submit feedback.");
+        }
       }
     });
   };
+
 
   // Handle Cancel
   const handleCancel = async (campId, paymentStatus, confirmationStatus) => {
@@ -36,14 +52,13 @@ const RegisteredCamps = () => {
       text: "You won't be able to revert this cancellation!",
       icon: "warning",
       showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, cancel it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // Cancel registration logic
-          // Example: await axios.delete(`/camps/${campId}`);
+          await axiosPublic.delete(`/delete-participants/${campId}`);
           refetch(); // Refresh data
           Swal.fire({
             title: "Cancelled!",
@@ -59,13 +74,12 @@ const RegisteredCamps = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">
+    <div className="p-4">
+      <h2 className="text-2xl font-semibold mb-4 text-center">
         Registered Camps ({registeredCamps.length})
       </h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
-          {/* Table Header */}
           <thead>
             <tr>
               <th>Participant Name</th>
@@ -83,18 +97,15 @@ const RegisteredCamps = () => {
                 <td>{camp.campName}</td>
                 <td>${camp.campFees.toFixed(2)}</td>
                 <td>
-                  <Link to={`/dashboard/payment/${camp._id}`}>
-                    <button className="btn btn-sm bg-green-500">Pay</button>
-                  </Link>
-                </td>
-                <td
-                  className={
-                    camp.paymentStatus === "Paid"
-                      ? "text-green-600 font-semibold"
-                      : "text-red-600 font-semibold"
-                  }
-                >
-                  {camp.paymentStatus}
+                  {camp.paymentStatus === "Paid" ? (
+                    <span className="text-green-600 font-semibold">Paid</span>
+                  ) : (
+                    <Link to={`/dashboard/payment/${camp._id}`}>
+                      <button className="btn btn-sm bg-green-500 text-white">
+                        Pay
+                      </button>
+                    </Link>
+                  )}
                 </td>
                 <td
                   className={
@@ -106,14 +117,12 @@ const RegisteredCamps = () => {
                   {camp.confirmationStatus}
                 </td>
                 <td className="space-x-2">
-                  {/* Feedback Button */}
                   <button
                     onClick={() => handleFeedback(camp._id)}
                     className="btn btn-sm btn-info"
                   >
                     Feedback
                   </button>
-                  {/* Cancel Button */}
                   <button
                     onClick={() =>
                       handleCancel(

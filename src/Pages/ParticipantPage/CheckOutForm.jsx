@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCamps from "../../Hooks/useCamps";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = ({ campId }) => {
   const [error, setError] = useState(""); // Initialize error as an empty string
@@ -14,6 +15,7 @@ const CheckOutForm = ({ campId }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [camps] = useCamps();
+  const navigate = useNavigate();
 
   // Calculate total camp fees, default to 0 if camps is undefined
   const totalCampFees =
@@ -93,6 +95,7 @@ const CheckOutForm = ({ campId }) => {
 
     // Payment successful feedback (redirect or show message)
     toast.success("Payment successful! Thank you for your purchase.");
+    navigate('/dashboard/paymentHistory');
     const payment = {
       email: user.email,
       amount: totalCampFees,
