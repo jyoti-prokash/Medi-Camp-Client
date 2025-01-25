@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
+
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import slide1 from "../../../assets/Banner Image/medicamp1.jpg";
 import slide2 from "../../../assets/Banner Image/medicamp-2.jpg";

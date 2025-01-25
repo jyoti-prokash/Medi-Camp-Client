@@ -1,14 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from '../../assets/icons/medical-camp-logo-designs-health-service-clinic-hospital-symbols_1093924-875.jpeg'
 
 const Footer = () => {
   return (
     <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+      <div className="text-2xl font-bold">
+        <h2>Medi|Camp</h2>
+        <img className="w-40 mt-2 rounded-2xl" src={logo} alt="" srcset="" />
+      </div>
       <nav className="grid grid-flow-col gap-4">
         <a className="link link-hover">About us</a>
         <a className="link link-hover">Contact</a>
-        <Link to="/availableCamp" className="link link-hover">All Camps</Link>
-        <Link to="/login" className="link link-hover">Join Us</Link>
+        <Link to="/availableCamp" className="link link-hover">
+          All Camps
+        </Link>
+        <Link to="/login" className="link link-hover">
+          Join Us
+        </Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
@@ -49,8 +58,8 @@ const Footer = () => {
       </nav>
       <aside>
         <p>
-          Copyright © {new Date().getFullYear()} - All right reserved by Medi|Camp
-          Industries Ltd
+          Copyright © {new Date().getFullYear()} - All right reserved by
+          Medi|Camp Industries Ltd
         </p>
       </aside>
     </footer>

@@ -1,8 +1,28 @@
-# React + Vite
+<h1>MediCamp</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>MediCamp is a dynamic web application that provides detailed information about various camps and their professionals. Users can search, sort, and browse available camps while exploring their fees, participants, and more. This project is built with modern technologies to ensure a responsive and user-friendly experience.</p>
+Live Link: 
+<h2>Features</h2>
+-- Camp Listings: View all available camps with detailed information.
+-- Search Functionality: Search camps by name or professional name.
+--Sorting: Sort camps by fees (lowest to highest or vice versa).
+-- Responsive Design: Seamlessly adapts to different screen sizes.
+-- Layout Toggle: Switch between two-column and three-column layouts for browsing camps.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h1>Tech Stack</h1>
+<h2>Frontend:</h2>
+React.js (Component-based UI)
+Tailwind CSS (Utility-first CSS framework)
+
+<h2>Backend:</h2>
+Node.js (Server-side runtime)
+Express.js (Web framework for Node.js)
+MongoDB (Database for storing camp data)
+
+<h2>Additional Tools: </h2>
+React Router (For client-side routing)
+Custom Hooks (For reusable logic)
+
+Backend Repository: 
+
