@@ -2,8 +2,8 @@
 
 <p>MediCamp is a dynamic web application that provides detailed information about various camps and their professionals. Users can search, sort, and browse available camps while exploring their fees, participants, and more. This project is built with modern technologies to ensure a responsive and user-friendly experience.</p>
 
-Live Link: https://medical-camp-20.firebaseapp.com/
-Server repository: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-jyoti-prokash
+<p>Live Link: https://medical-camp-20.firebaseapp.com/</p>
+<p>Server repository: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-jyoti-prokash</p>
 
 <h2>Features</h2>
 
