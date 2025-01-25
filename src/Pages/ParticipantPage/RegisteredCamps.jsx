@@ -39,7 +39,6 @@ const RegisteredCamps = () => {
     });
   };
 
-
   // Handle Cancel
   const handleCancel = async (campId, paymentStatus, confirmationStatus) => {
     if (paymentStatus === "Paid" && confirmationStatus === "Confirmed") {
@@ -98,7 +97,7 @@ const RegisteredCamps = () => {
                 <td>${camp.campFees.toFixed(2)}</td>
                 <td>
                   {camp.paymentStatus === "Paid" ? (
-                    <span className="text-green-600 font-semibold">Paid</span>
+                    <span className="text-green-600 font-semibold btn-disabled">Paid</span>
                   ) : (
                     <Link to={`/dashboard/payment/${camp._id}`}>
                       <button className="btn btn-sm bg-green-500 text-white">

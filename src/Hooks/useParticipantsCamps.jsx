@@ -14,7 +14,6 @@ const useParticipantsCamps = () => {
     queryFn: async () => {
       if (!user?.email) return []; // Return an empty array if email is undefined
       const res = await axiosSecure.get(`/participants/${user.email}`); // Ensure email is passed correctly
-      console.log(res.data);
       return res.data;
     },
     enabled: !!user?.email, // Only run the query if email exists

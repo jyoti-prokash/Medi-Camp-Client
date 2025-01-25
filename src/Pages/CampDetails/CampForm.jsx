@@ -15,29 +15,39 @@ const CampForm = ({ camp, refetch }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      const participantData = {
-        ...data,
-        campName,
-        campFees: parseFloat(campFees),
-        location,
-        campId: _id,
-        professionalName,
-        participantName: user?.displayName,
-        participantEmail: user?.email,
-      };
-      // Save participant data to the backend
-      const response = await axiosPublic.post("/participants", participantData);
-      if (response?.data?.insertedId) {
-        reset();
-        toast.success("Participant data submitted successfully!");
-        refetch();
-      }
-    } catch (error) {
-      toast.error(error?.response?.data);
-    }
-  };
+ const onSubmit = async (data) => {
+   try {
+     const participantData = {
+       ...data,
+       campName, 
+       campFees: parseFloat(campFees), 
+       location, 
+       campId: _id, 
+       professionalName, 
+       participantName: user?.displayName, 
+       participantEmail: user?.email,
+       confirmationStatus: "Pending",
+       paymentStatus: "Unpaid",
+     };
+
+     // Save participant data to the backend
+     const response = await axiosPublic.post("/participants", participantData);
+
+     // Check if the participant was successfully inserted
+     if (response?.data?.insertedId) {
+       reset(); 
+       toast.success("Participant data submitted successfully!");
+       refetch(); // Refetch data if necessary
+     }
+   } catch (error) {
+     // Handle error and display a user-friendly message
+     console.error("Error submitting participant data:", error); // Log for debugging
+     toast.error(
+       error?.response?.data || "An error occurred. Please try again."
+     );
+   }
+ };
+
   //   close modal
   const modal = document.getElementById("my_modal_4");
   if (modal) {
