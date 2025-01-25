@@ -22,7 +22,7 @@ const CampForm = ({ camp, refetch }) => {
        campName, 
        campFees: parseFloat(campFees), 
        location, 
-       campId: _id, 
+       campId: _id,
        professionalName, 
        participantName: user?.displayName, 
        participantEmail: user?.email,

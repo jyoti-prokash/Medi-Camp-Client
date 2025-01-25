@@ -85,7 +85,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/payment/:id",
+        path: "/dashboard/payment/:campId",
         element: (
           <PrivetRoute>
             <Payment></Payment>

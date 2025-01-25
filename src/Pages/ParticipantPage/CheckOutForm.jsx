@@ -6,7 +6,7 @@ import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const CheckOutForm = ({ campId }) => {
+const CheckOutForm = ({ campId: participantId }) => {
   const [error, setError] = useState(""); // Initialize error as an empty string
   const [clientSecret, setClientSecret] = useState(null); // Initialize clientSecret as null
   const [isProcessing, setIsProcessing] = useState(false); // To handle payment submission state
@@ -95,13 +95,13 @@ const CheckOutForm = ({ campId }) => {
 
     // Payment successful feedback (redirect or show message)
     toast.success("Payment successful! Thank you for your purchase.");
-    navigate('/dashboard/paymentHistory');
+    navigate("/dashboard/paymentHistory");
     const payment = {
-      email: user.email,
+      email: user?.email,
       amount: totalCampFees,
       date: new Date(),
       transactionId: paymentIntent.id,
-      campId: campId,
+      participantId: participantId,
       status: "Paid",
     };
     const res = axiosSecure.post("/payment", payment);
