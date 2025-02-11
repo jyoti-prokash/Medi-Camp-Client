@@ -4,6 +4,8 @@
 
 <p>Live Link: https://medical-camp-20.firebaseapp.com/</p>
 <p>Server repository: https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-jyoti-prokash</p>
+<p>admin: admin@gmail.com</p>
+<p>pass: 12345Admin</p>
 
 <h2>Features</h2>
 
