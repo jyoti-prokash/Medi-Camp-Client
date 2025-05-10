@@ -10,6 +10,8 @@
 <h2>Features</h2>
 
 <ul> 
+    <li>Login-based system </li>
+    <li> Each user can add/manage own cars </li>
     <li>Camp Listings: View all available camps with detailed information.</li>
     <li>Search Functionality: Search camps by name or professional name. </li>
     <li>Sorting: Sort camps by fees (lowest to highest or vice versa). </li>
@@ -31,5 +33,4 @@ MongoDB (Database for storing camp data)
 React Router (For client-side routing)
 Custom Hooks (For reusable logic)
 
-Backend Repository: 
 
